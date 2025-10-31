@@ -112,7 +112,7 @@ watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
 </script>
 
 <template>
-  <div class="mx-4 flex h-dvh items-center justify-center select-none">
+  <div class="mx-4 flex h-dvh items-center justify-center">
     <div class="relative flex w-full max-w-md flex-col gap-4">
       <h1 class="text-center text-4xl font-bold text-slate-600">
         Code Generator 2FA
@@ -150,10 +150,15 @@ watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
         <div
           class="flex w-full items-center justify-between gap-2 rounded-md border-2 border-slate-600 px-2 py-1 text-center text-2xl text-slate-600"
         >
-          <div class="font-bold">
+          <div class="font-bold select-none">
             {{ code }}
           </div>
-          <div :class="timeRemaining <= 5 ? 'text-red-600' : 'text-green-600'">
+          <div
+            :class="[
+              'select-none',
+              timeRemaining <= 5 ? 'text-red-600' : 'text-green-600',
+            ]"
+          >
             {{ timeRemaining }}s
           </div>
         </div>
@@ -161,7 +166,7 @@ watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
         <div
           ref="copyButton"
           @click="copyCode"
-          class="w-full rounded-md border-2 border-slate-700 bg-slate-700 px-2 py-1 text-center text-2xl font-bold text-white hover:border-slate-600 hover:bg-slate-600"
+          class="w-full rounded-md border-2 border-slate-700 bg-slate-700 px-2 py-1 text-center text-2xl font-bold text-white select-none hover:border-slate-600 hover:bg-slate-600"
         >
           Copy Code
         </div>
