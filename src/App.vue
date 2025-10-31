@@ -18,6 +18,7 @@ const code = ref<string>("000000");
 const timeRemaining = ref<number>(0);
 const timerId = ref<number | undefined>(undefined);
 
+// Copy current code to clipboard with brief visual feedback
 const copyCode = async () => {
   try {
     await navigator.clipboard.writeText(code.value);
@@ -35,7 +36,7 @@ const copyCode = async () => {
   }
 };
 
-// Функция для обновления кода
+// Update TOTP code and handle invalid secret
 const updateCode = async (secret: string) => {
   secretInput.value = secret;
 
@@ -51,6 +52,7 @@ const updateCode = async (secret: string) => {
   }
 };
 
+// Reset state and URL when secret is cleared
 const clearSecret = () => {
   secretInput.value = "";
   errorMessage.value = "";
@@ -65,12 +67,13 @@ const clearSecret = () => {
   }
 };
 
-// Функция для обновления времени
+// Tick: update seconds left and recompute code
 const updateTimeRemaining = () => {
   timeRemaining.value = timeLeft();
   updateCode(secretInput.value);
 };
 
+// Sync URL path to secret and start the 1s timer if needed
 const handlePath = (path: string) => {
   const secret = path.replace("/", "").toUpperCase().trim();
 
@@ -86,7 +89,7 @@ const handlePath = (path: string) => {
   }
 };
 
-// Функция для обработки ввода
+// Normalize input and keep URL/code in sync
 const handleInput = (input: string) => {
   secretInput.value = input.toUpperCase().replace(/([^\w])/g, "");
 
@@ -98,13 +101,13 @@ const handleInput = (input: string) => {
   }
 };
 
-// Слушаем изменения в route.path
+// Watch route.path changes
 watch(
   () => route.path,
   (newPath) => handlePath(newPath),
 );
 
-// Слушаем изменения в secretInput
+// Watch secret input changes
 watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
 </script>
 
@@ -165,7 +168,6 @@ watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
       </div>
 
       <div class="flex items-center justify-center gap-4">
-        <!-- <div class=""> -->
         <a
           href="https://t.me/doroved_stories"
           target="_blank"
@@ -174,9 +176,7 @@ watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
           <img src="/doroved.jpeg" class="size-6 rounded-full shadow-md" />
           <span>doroved</span>
         </a>
-        <!-- </div> -->
 
-        <!-- <div class="flex"> -->
         <a
           href="https://github.com/doroved/2fa.fb.expert"
           target="_blank"
@@ -186,7 +186,6 @@ watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
           <GithubIcon class="size-6" />
           <span>source code</span>
         </a>
-        <!-- </div> -->
       </div>
     </div>
   </div>

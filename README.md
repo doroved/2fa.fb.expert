@@ -49,6 +49,10 @@ bun preview
 4. The URL updates to `/{SECRET}` — bookmark or share for quick access.
 5. If the secret is invalid, an “Invalid secret” message appears.
 
+### Example URL
+
+[https://2fa.fb.expert/H5PJ4INB7VOINDJRL7WPWMZJHO74O3XG](https://2fa.fb.expert/H5PJ4INB7VOINDJRL7WPWMZJHO74O3XG)
+
 ### Notes
 
 - Input is converted to uppercase and stripped of non‑alphanumeric characters.
