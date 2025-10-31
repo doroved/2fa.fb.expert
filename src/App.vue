@@ -122,7 +122,7 @@ watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
           ref="secretInputRef"
           v-model="secretInput"
           type="text"
-          class="w-full rounded-md border-2 bg-white py-2 pr-9 pl-2 text-slate-600 shadow outline-0"
+          class="w-full rounded-md border-2 py-2 pr-9 pl-2 text-slate-600 shadow outline-0"
           :class="
             errorMessage
               ? 'border-red-600 focus:border-red-600'
@@ -148,7 +148,7 @@ watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
 
       <div class="flex items-center justify-between gap-4">
         <div
-          class="flex w-full items-center justify-between gap-2 rounded-md border-2 border-slate-600 bg-white px-2 py-1 text-center text-2xl text-slate-600 shadow"
+          class="flex w-full items-center justify-between gap-2 rounded-md border-2 border-slate-600 px-2 py-1 text-center text-2xl text-slate-600 shadow"
         >
           <div class="font-bold select-none">
             {{ code }}
