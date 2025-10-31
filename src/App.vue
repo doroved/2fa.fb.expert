@@ -2,7 +2,7 @@
 import { ref, useTemplateRef, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { X } from "lucide-vue-next";
-import { totp } from "native-browser-otp";
+import { totp, timeLeft } from "native-browser-otp";
 
 const router = useRouter();
 const route = useRoute();
@@ -15,7 +15,7 @@ const errorMessage = ref<string>("");
 const secretInput = ref<string>("");
 const code = ref<string>("000000");
 const timeRemaining = ref<number>(0);
-let timerId = ref<number | undefined>(undefined);
+const timerId = ref<number | undefined>(undefined);
 
 const copyCode = async () => {
   try {
@@ -66,9 +66,7 @@ const clearSecret = () => {
 
 // Функция для обновления времени
 const updateTimeRemaining = () => {
-  const currentTime = Math.floor(Date.now() / 1000);
-  timeRemaining.value = 30 - (currentTime % 30);
-
+  timeRemaining.value = timeLeft();
   updateCode(secretInput.value);
 };
 
@@ -134,7 +132,7 @@ watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
           :size="24"
           @click="clearSecret"
           v-if="secretInput"
-          class="absolute top-1/2 right-2 -translate-y-1/2 rounded-md bg-slate-600 text-white hover:bg-slate-500"
+          class="absolute top-1/2 right-2 -translate-y-1/2 rounded-md text-slate-700 hover:rounded-full hover:bg-slate-700/20"
         />
         <p
           v-if="errorMessage"
