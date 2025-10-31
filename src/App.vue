@@ -2,6 +2,7 @@
 import { ref, useTemplateRef, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { X } from "lucide-vue-next";
+import GithubIcon from "./components/GithubIcon.vue";
 import { totp, timeLeft } from "native-browser-otp";
 
 const router = useRouter();
@@ -163,18 +164,30 @@ watch(secretInput, (newSecretInput) => handleInput(newSecretInput));
         </div>
       </div>
 
-      <p class="flex items-center justify-center gap-1">
-        Created by
-
+      <div class="flex items-center justify-center gap-4">
+        <!-- <div class=""> -->
         <a
           href="https://t.me/doroved_stories"
           target="_blank"
           class="flex items-center gap-1 font-bold text-slate-900 hover:text-slate-600"
         >
           <img src="/doroved.jpeg" class="size-6 rounded-full shadow-md" />
-          doroved</a
+          <span>doroved</span>
+        </a>
+        <!-- </div> -->
+
+        <!-- <div class="flex"> -->
+        <a
+          href="https://github.com/doroved/2fa.fb.expert"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 font-bold text-slate-900 hover:text-slate-600"
         >
-      </p>
+          <GithubIcon class="size-6" />
+          <span>source code</span>
+        </a>
+        <!-- </div> -->
+      </div>
     </div>
   </div>
 </template>
